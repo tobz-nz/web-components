@@ -71,7 +71,7 @@ export class TabControl extends HTMLElement {
         this.#tabWindows.push(tabWindow)
 
         // Check/Set if the new tab window is active
-        this.querySelector(':is(:checked, :selected)').dispatchEvent(new Event(this.on, {bubbles: true}))
+        this.querySelector(':is(:checked, :selected)')?.dispatchEvent(new Event(this.on, {bubbles: true}))
     }
 
     removeTabWindow(tabWindow) {
