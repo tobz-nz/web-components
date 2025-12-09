@@ -5,13 +5,28 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Demos</title>
 
+	<script type="importmap">
+    {
+        "imports": {
+            "character-count.js": "./character-count/character-count.js?v=1",
+            "tab-control.js": "./tabs/tab-control.js?v=1",
+            "drop-menu.js": "./drop-menu/drop-menu.js?v=1",
+            "drop-menu.css": "./drop-menu/drop-menu.css?v=1"
+        }
+    }
+    </script>
+
+	<script type="module">
+       	import 'character-count.js'
+        import 'tab-control.js'
+        import 'drop-menu.js'
+	</script>
+
 	<style>
 	:is(character-count, tab-control, tab-window):not(:defined) {
         visibility: hidden;
 	}
 	</style>
-
-	<script src="./character-count/character-count.js" type="module"></script>
 	<style>
 	    character-count[maxlength] {
 			color: green;
@@ -25,7 +40,6 @@
 		}
 	</style>
 
-	<script src="./tabs/tab-control.js" type="module"></script>
 	<style>
 	tab-control {
 	    display: inline-block;
@@ -38,6 +52,24 @@
 	.tab-group {
 	    display: grid;
 		gap: 10px;
+	}
+	</style>
+
+	<style>
+	drop-menu {
+    	margin-inline: auto;
+        display: flex;
+
+	    menu-trigger {
+			padding: 4px;
+		}
+
+		&::part(menu):popover-open {
+		    margin-top: 5px;
+
+			display: grid;
+			gap: 4px;
+		}
 	}
 	</style>
 </head>
@@ -92,5 +124,19 @@
             </tab-window>
         </section>
     </section>
+
+    <section>
+        <h2>Drop-Menu</h2>
+        <hr>
+
+        <drop-menu id="test">
+            <menu-trigger slot="trigger">...</menu-trigger>
+
+            <li><button>Item 1</button></li>
+            <li><button>Item 2</button></li>
+            <li><button>Item 3 longer content</button></li>
+        </drop-menu>
+    </section>
+
 </body>
 </html>

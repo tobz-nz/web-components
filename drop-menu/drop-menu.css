@@ -1,0 +1,25 @@
+:host {
+    position: static;
+    display: inline-flex;
+    overflow: visible;
+
+    button {
+        display: inline-flex;
+        anchor-name: --menu;
+    }
+
+    > menu {
+        position-anchor: --menu;
+        position-area: var(--menu-position-area, block-end span-inline-start);
+        position-try-order: most-block-size;
+        position-try-fallbacks: flip-block, flip-inline;
+
+        margin: 0;
+        padding: 0;
+        width: max-content;
+        max-height: 70vh;
+        overflow: auto;
+
+        border: none;
+    }
+}
