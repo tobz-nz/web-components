@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Demos</title>
+
+	<script src="./character-count/character-count.js" type="module"></script>
+	<style>
+	    character-count[maxlength] {
+			color: green;
+
+			&:state(--negative) {
+		    	color: red;
+			}
+			&:state(--zero) {
+				color: blue;
+			}
+		}
+	</style>
+</head>
+<body>
+
+    <section>
+        <h2>Character-Count</h2>
+        <hr>
+
+        <input id="max-length-text" type="text" placeholder="Characters remaining" maxlength="20">
+        <character-count for="max-length-text"></character-count>
+
+        <br>
+        <br>
+
+        <input id="no-maxlength-text" type="text" placeholder="Character count">
+        <character-count for="no-maxlength-text"></character-count>
+
+        <br>
+        <br>
+
+        <input id="maxlength-negative-text" type="text" placeholder="character count, allow negative">
+        <character-count for="maxlength-negative-text" maxlength="20"></character-count>
+
+        <br>
+        <br>
+
+        <input id="change-text" type="text" placeholder="count, triggered on change event">
+        <character-count for="change-text" on="change"></character-count>
+    </section>
+
+</body>
+</html>
