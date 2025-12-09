@@ -146,7 +146,7 @@ export class TabWindow extends HTMLElement {
     }
 }
 
-if (document.querySelector(`[src$="${new URL(import.meta.url).pathname}"][import-only]`) === null) {
+if (new URL(import.meta.url).searchParams.has('export') === false) {
     customElements.define('tab-control', TabControl)
     customElements.define('tab-window', TabWindow)
 }
