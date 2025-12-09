@@ -31,7 +31,7 @@ export class TabControl extends HTMLElement {
     }
 
     handleEvent(event) {
-        if (event.type === this.on) {
+        if (event.type === this.on && event.target.value) {
             // Toggle the open attribute on the tab window
             this.#tabWindows.forEach(tabWindow => {
                 tabWindow.toggle(tabWindow.name === event.target.value)
