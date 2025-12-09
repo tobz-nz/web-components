@@ -47,25 +47,25 @@
         <h2>Character-Count</h2>
         <hr>
 
-        <input id="max-length-text" type="text" placeholder="Characters remaining" maxlength="20">
+        <input id="max-length-text" type="text" size="36" placeholder="Characters remaining" maxlength="10">
         <character-count for="max-length-text"></character-count>
 
         <br>
         <br>
 
-        <input id="no-maxlength-text" type="text" placeholder="Character count">
+        <input id="no-maxlength-text" type="text" size="36" placeholder="Character count">
         <character-count for="no-maxlength-text"></character-count>
 
         <br>
         <br>
 
-        <input id="maxlength-negative-text" type="text" placeholder="character count, allow negative">
-        <character-count for="maxlength-negative-text" maxlength="20"></character-count>
+        <textarea id="maxlength-negative-text" cols="40" placeholder="remaining character count, allows negative"></textarea>
+        <character-count for="maxlength-negative-text" maxlength="10"></character-count>
 
         <br>
         <br>
 
-        <input id="change-text" type="text" placeholder="count, triggered on change event">
+        <input id="change-text" type="text" size="36" placeholder="count, triggered on change event">
         <character-count for="change-text" on="change"></character-count>
     </section>
 

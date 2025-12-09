@@ -12,7 +12,7 @@ For forced limiting to the maxlength
 <character-count for="my-input"></character-count>
 ```
 
-or for just counting the characters - allows for negative count.
+or for just counting the remaining characters - allows for negative count.
 
 ```html
 <input id="my-input">
