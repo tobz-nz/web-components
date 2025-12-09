@@ -5,6 +5,12 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Demos</title>
 
+	<style>
+	:is(character-count, tab-control, tab-window):not(:defined) {
+        visibility: hidden;
+	}
+	</style>
+
 	<script src="./character-count/character-count.js" type="module"></script>
 	<style>
 	    character-count[maxlength] {
@@ -17,6 +23,22 @@
 				color: blue;
 			}
 		}
+	</style>
+
+	<script src="./tabs/tab-control.js" type="module"></script>
+	<style>
+	tab-control {
+	    display: inline-block;
+        padding: .5rem;
+	}
+	tab-window {
+	    padding: .5rem;
+	    border: 1px solid;
+	}
+	.tab-group {
+	    display: grid;
+		gap: 10px;
+	}
 	</style>
 </head>
 <body>
@@ -47,5 +69,32 @@
         <character-count for="change-text" on="change"></character-count>
     </section>
 
+    <section>
+        <h2>Tabs</h2>
+        <hr>
+
+        <tab-control group="some-group">
+            <label><input type="radio" name="whatever" value="tab-1"> Tab 1</label>
+            <label><input type="radio" name="whatever" value="tab-2"> Tab 2</label>
+        </tab-control>
+
+        <section class="tab-group">
+            <tab-window group="some-group" name="tab-1" open>
+            Tab 1 Content
+            </tab-window>
+
+            <tab-window group="some-group" name="tab-2">
+            Tab 2 Content
+            </tab-window>
+
+            <tab-window group="some-group" name="tab-1" open>
+            A second Tab 1 Window
+            </tab-window>
+        </section>
+    </section>
+
+    <script>
+        console.log('body end')
+    </script>
 </body>
 </html>
