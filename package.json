@@ -1,0 +1,15 @@
+{
+	"name": "web-components",
+	"version": "0.0.1",
+	"scripts": {
+		"start": "http-server",
+		"demo": "http-server -o",
+		"test": "npx playwright test"
+	},
+	"devDependencies": {
+		"@playwright/test": "^1.57.0"
+	},
+	"dependencies": {
+		"http-server": "^14.1.1"
+	}
+}
