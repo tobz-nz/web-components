@@ -1,15 +1,14 @@
-import styles from "drop-menu.css" with { type: "css" };
+// import styles from "drop-menu.css" with { type: "css" };
 
 export default class DropMenu extends HTMLElement {
-    connectedCallback() {
-        const shadowRoot = this.attachShadow({ mode: 'open' });
+    constructor() {
+        super()
 
-        shadowRoot.adoptedStyleSheets = [styles];
+        const shadowRoot = this.attachShadow({ mode: 'open' })
+
+        // shadowRoot.adoptedStyleSheets = [styles];
+
         shadowRoot.innerHTML = `
-            <style>
-
-            </style>
-
             <button commandfor="${this.id}-menu" command="toggle-popover" part="toggle">
                 <slot name="trigger">
                     <menu-trigger>...</menu-trigger>
@@ -21,10 +20,16 @@ export default class DropMenu extends HTMLElement {
             </menu>
         `;
 
-        // if (this.hasAttribute('hover')) {
-        //     this.querySelector(':host > button')
-        // }
+        fetch(import.meta.url.replace('.js', '.css'))
+            .then(response => response.text())
+            .then(css => {
+                const style = document.createElement('style')
+                style.textContent = css
+                shadowRoot.insertBefore(style, shadowRoot.firstChild)
+            })
     }
 }
 
-customElements.define('drop-menu', DropMenu);
+if (new URL(import.meta.url).searchParams.has('export') === false) {
+    customElements.define('drop-menu', DropMenu)
+}
