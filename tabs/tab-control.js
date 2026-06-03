@@ -1,39 +1,39 @@
 export class TabControl extends HTMLElement {
+    constructor() {
+        super()
 
-    #tabWindows = []
-
-    connectedCallback() {
-        let sheet = new CSSStyleSheet({baseURL: import.meta.url})
-        sheet.replaceSync(`
-            :where(tab-control) {
-                display: inline-flex;
-            }
-
-            :where(tab-window) {
-                display: block;
-
-                &:not([open]) {
-                    display: none;
+        if (!document.adoptedStyleSheets.find(s => s.baseUrl === import.meta.url)) {
+            let sheet = new CSSStyleSheet({baseURL: import.meta.url})
+            sheet.replaceSync(`
+                :where(tab-control) {
+                    display: inline-flex;
                 }
-            }
-        `)
 
-        if (!document.adoptedStyleSheets.find(s => s.baseUrl === sheet.baseUrl)) {
+                :where(tab-window) {
+                    display: block;
+
+                    &:not([open]) {
+                        display: none;
+                    }
+                }
+            `)
+
             document.adoptedStyleSheets.push(sheet);
         }
+    }
 
-        this.addEventListener(this.on, this)
+    connectedCallback() {
+        this.on.split(' ').forEach(event => {
+            this.addEventListener(event, this)
+        })
+
         this.addEventListener('tab-change', this)
     }
 
-    disconnectedCallback() {
-        this.removeEventListener(this.on, this)
-    }
-
     handleEvent(event) {
-        if (event.type === this.on && event.target.value) {
+        if (this.on.split(' ').includes(event.type) && event.target.value) {
             // Toggle the open attribute on the tab window
-            this.#tabWindows.forEach(tabWindow => {
+            this.tabWindows.forEach(tabWindow => {
                 tabWindow.toggle(tabWindow.name === event.target.value)
             })
         }
@@ -44,52 +44,35 @@ export class TabControl extends HTMLElement {
     }
 
     get on() {
-        return this.getAttribute('on') || 'input'
+        return this.getAttribute('on') || 'input click'
     }
 
     set on(value) {
         this.setAttribute('on', value)
     }
 
-    get targets() {
-        return this.getAttribute('targets')
+    get for() {
+        return this.getAttribute('for')
     }
 
-    get activeTab() {
-        return this.getAttribute('active-tab')
+    set for(value) {
+        this.setAttribute('for', value)
     }
 
-    set activeTab(value) {
-        this.setAttribute('active-tab', value)
+    get activeTabs() {
+        return this.tabWindows.filter(window => window.open)
     }
 
     get tabWindows() {
-        return this.#tabWindows
-    }
+        let selector = this.for.split(' ')
+            .map(group => `tab-window[group~="${group}"]`)
+            .join(',')
 
-    addTabWindow(tabWindow) {
-        this.#tabWindows.push(tabWindow)
-
-        // Check/Set if the new tab window is active
-        this.querySelector(':is(:checked, :selected)')?.dispatchEvent(new Event(this.on, {bubbles: true}))
-    }
-
-    removeTabWindow(tabWindow) {
-        this.#tabWindows = this.#tabWindows.filter(window => window !== tabWindow)
+        return document.querySelectorAll(selector)
     }
 }
 
 export class TabWindow extends HTMLElement {
-    connectedCallback() {
-        // push this window into the control's list of tab-windows
-        document.querySelectorAll(`tab-control[group="${this.group}"]`).forEach(control => control.addTabWindow(this))
-    }
-
-    disconnectedCallback() {
-        // remove this window from the control's list of tab-windows
-        document.querySelectorAll(`tab-control[group="${this.group}"]`).forEach(control => control.removeTabWindow(this))
-    }
-
     get controls() {
         return document.querySelectorAll(`tab-control[group="${this.group}"]`)
     }
@@ -119,6 +102,16 @@ export class TabWindow extends HTMLElement {
                 capture: true
             }))
         }
+
+        this.dispatchEvent(new CustomEvent('toggle', {
+            bubbles: true,
+            detail: {
+                tabWindow: this,
+                group: this.group,
+                name: this.name,
+                open: this.open
+            }
+        }))
     }
 
     get group() {
