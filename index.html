@@ -11,7 +11,7 @@
             "character-count.js": "./character-count/character-count.js?v=1",
             "tab-control.js": "./tabs/tab-control.js?v=1",
             "drop-menu.js": "./drop-menu/drop-menu.js?v=1",
-            "drop-menu.css": "./drop-menu/drop-menu.css?v=1"
+            "intl-currency.js": "./intl-currency/intl-currency.js?v=1",
         }
     }
     </script>
@@ -20,6 +20,7 @@
        	import 'character-count.js'
         import 'tab-control.js'
         import 'drop-menu.js'
+        import 'intl-currency.js'
 	</script>
 
 	<style>
@@ -136,6 +137,18 @@
             <li><button>Item 2</button></li>
             <li><button>Item 3 longer content</button></li>
         </drop-menu>
+    </section>
+
+    <section>
+        <h2>Intl Currency</h2>
+        <hr>
+
+        <div style="display:grid">
+            <intl-currency value="12.50"></intl-currency>
+            <intl-currency value="12.50" locale="en-US"></intl-currency>
+            <intl-currency value="12.50" locale="eu-DE"></intl-currency>
+            <intl-currency currency="EUR">12.50</intl-currency>
+        </div>
     </section>
 
 </body>
