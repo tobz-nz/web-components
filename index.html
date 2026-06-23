@@ -12,6 +12,7 @@
             "tab-control.js": "./tabs/tab-control.js?v=1",
             "drop-menu.js": "./drop-menu/drop-menu.js?v=1",
             "match-input.js": "./match-input/match-input.js",
+            "enhanced-form.js": "./enhanced-form/enhanced-form.js?v=1",
             "intl-currency.js": "./intl-currency/intl-currency.js?v=1",
         }
     }
@@ -22,6 +23,7 @@
         import 'tab-control.js'
         import 'drop-menu.js'
         import 'match-input.js'
+        import 'enhanced-form.js'
         import 'intl-currency.js'
 	</script>
 
@@ -153,6 +155,26 @@
             <li><button>Item 2</button></li>
             <li><button>Item 3 longer content</button></li>
         </drop-menu>
+    </section>
+
+    <section>
+        <h2>Enhanced Form</h2>
+        <hr>
+
+        <enhanced-form auto-submit="blur" callback-target="#form-example" callback-event="submit-success" async>
+            <form action="./enhanced-form/example.json" method="POST">
+                <input type="text" name="name">
+                <button type="submit">Submit</button>
+            </form>
+        </enhanced-form>
+
+        <output id="form-example"></output>
+
+        <script type="module">
+            document.getElementById('form-example').addEventListener('submit-success', event => {
+                event.target.textContent = JSON.stringify(event.detail)
+            })
+        </script>
     </section>
 
     <section>
