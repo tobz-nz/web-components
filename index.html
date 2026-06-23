@@ -11,6 +11,7 @@
             "character-count.js": "./character-count/character-count.js?v=1",
             "tab-control.js": "./tabs/tab-control.js?v=1",
             "drop-menu.js": "./drop-menu/drop-menu.js?v=1",
+            "match-input.js": "./match-input/match-input.js",
             "intl-currency.js": "./intl-currency/intl-currency.js?v=1",
         }
     }
@@ -20,6 +21,7 @@
        	import 'character-count.js'
         import 'tab-control.js'
         import 'drop-menu.js'
+        import 'match-input.js'
         import 'intl-currency.js'
 	</script>
 
@@ -72,6 +74,10 @@
 			gap: 4px;
 		}
 	}
+
+        match-input:user-invalid::part(input) {
+            background-color: color-mix(in srgb, red 10%, transparent);
+        }
 	</style>
 </head>
 <body>
@@ -127,7 +133,17 @@
     </section>
 
     <section>
-        <h2>Drop-Menu</h2>
+        <h2>Match Input</h2>
+        <hr>
+
+        <label for="input-match">Field 1</label>
+        <input id="input-match" value="test" />
+
+        <match-input for="input-match" name="matched"></match-input>
+    </section>
+
+    <section>
+        <h2>Drop Menu</h2>
         <hr>
 
         <drop-menu id="test">
