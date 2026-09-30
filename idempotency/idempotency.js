@@ -13,7 +13,7 @@ export default class IdempotencyKey extends HTMLElement {
         this.#internals.form?.addEventListener(this.on, this)
 
         if (!this.name) {
-            this.name = 'idempotency-key'
+            this.name = 'idempotency_key'
         }
 
         this.calculate()
