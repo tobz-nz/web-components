@@ -31,10 +31,6 @@ export default class IdempotencyKey extends HTMLElement {
         return this.getAttribute('value')
     }
 
-    set value(value) {
-        this.setAttribute('value', value)
-    }
-
     get on() {
         return this.getAttribute('on') || 'input'
     }
@@ -57,9 +53,8 @@ export default class IdempotencyKey extends HTMLElement {
                 return `${key}=${value}`
             }))
 
-        this.value = await this.hash(values.join('|'))
-
-        // set the value to the hash
+        // set hash the form value & add it to the form data
+        this.setAttribute('value', await this.hash(values.join('|')))
         this.#internals.setFormValue(this.value, this.value)
     }
 
