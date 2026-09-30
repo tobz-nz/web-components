@@ -15,6 +15,8 @@ export default class IdempotencyKey extends HTMLElement {
         if (!this.name) {
             this.name = 'idempotency-key'
         }
+
+        this.calculate()
     }
 
     get name() {
