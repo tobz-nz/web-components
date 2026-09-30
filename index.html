@@ -14,6 +14,7 @@
             "match-input.js": "./match-input/match-input.js",
             "enhanced-form.js": "./enhanced-form/enhanced-form.js?v=1",
             "intl-currency.js": "./intl-currency/intl-currency.js?v=1",
+            "idempotency.js": "./idempotency/idempotency.js?v=1"
         }
     }
     </script>
@@ -25,6 +26,7 @@
         import 'match-input.js'
         import 'enhanced-form.js'
         import 'intl-currency.js'
+        import 'idempotency.js'
 	</script>
 
 	<style>
@@ -194,6 +196,15 @@
             <intl-currency value="12.50" locale="eu-DE"></intl-currency>
             <intl-currency currency="EUR">12.50</intl-currency>
         </div>
+    </section>
+
+    <section>
+    	<form action="">
+            <idempotency-key name="idk" value="Test"></idempotency-key>
+    	    <div><input type="text" name="test1" placeholder="test 1"></div>
+    		<div><input type="text" name="test2" placeholder="test 2"></div>
+            <button>submit</button>
+    	</form>
     </section>
 
 </body>
