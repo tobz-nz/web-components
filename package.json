@@ -2,14 +2,15 @@
 	"name": "web-components",
 	"version": "0.0.1",
 	"scripts": {
-		"start": "http-server",
+		"start": "http-server -p ${PORT:-8080}",
 		"demo": "http-server -o",
-		"test": "npx playwright test"
+		"test": "npx playwright test",
+		"postinstall": "cp -R .project/git-hooks/. .git/hooks"
 	},
 	"devDependencies": {
-		"@playwright/test": "^1.57.0"
-	},
-	"dependencies": {
+		"@playwright/test": "^1.57.0",
+		"eslint": "^9.39.2",
+		"globals": "^17.0.0",
 		"http-server": "^14.1.1"
 	}
 }

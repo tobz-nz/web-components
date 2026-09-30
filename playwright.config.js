@@ -1,7 +1,9 @@
 import { defineConfig, devices } from '@playwright/test';
 
-// Default port to use for testing, but override in case 8080 is in use
-const port = process.env.PORT || 8080
+/* eslint-disable no-undef */
+
+// Use a dedicated test port so tests don't collide with other local servers on 8080
+const port = process.env.PORT || 8765
 
 export default defineConfig({
 
@@ -36,6 +38,9 @@ export default defineConfig({
 		command: 'npm run start',
 		url: `http://localhost:${port}`,
 		reuseExistingServer: !process.env.CI,
+		env: {
+			PORT: String(port),
+		},
 	},
 
 	// Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions.
