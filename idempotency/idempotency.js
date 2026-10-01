@@ -53,6 +53,9 @@ export default class IdempotencyKey extends HTMLElement {
                 return `${key}=${value}`
             }))
 
+        // prepend the form action to the values
+        values.unshift(this.#internals.form.action)
+
         // set hash the form value & add it to the form data
         this.setAttribute('value', await this.hash(values.join('|')))
         this.#internals.setFormValue(this.value, this.value)
